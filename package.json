@@ -1,0 +1,24 @@
+{
+  "name": "curso-de-programacion-web-basica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannadev-07/Curso-de-programacion-web-basica.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dannadev-07/Curso-de-programacion-web-basica/issues"
+  },
+  "homepage": "https://github.com/dannadev-07/Curso-de-programacion-web-basica#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
