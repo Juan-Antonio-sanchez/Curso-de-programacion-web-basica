@@ -215,16 +215,6 @@
             line-height: 1.5;
         }
 
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            clip-path: inset(50%);
-        }
-
         @media (max-width: 520px) {
             body {
                 padding: 28px 14px;
@@ -279,6 +269,17 @@
         <p class="status-message" id="status-message" role="status" aria-live="polite"></p>
     </main>
 
+    <style>
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            clip-path: inset(50%);
+        }
+    </style>
     <script>
         const STORAGE_KEY = "mis-tareas";
         const form = document.querySelector("#task-form");
