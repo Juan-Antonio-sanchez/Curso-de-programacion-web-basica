@@ -9,8 +9,10 @@
     <div class="tareas">
         <center><h2 class="titulo">Tareas</h2>
     
-        <input type="text" id="tareaInput" placeholder="Ingrese una tarea">
-        <button id="agregarTareaBtn">Agregar Tarea</button>
+        <form id="formularioTarea">
+            <input type="text" id="tareaInput" placeholder="Ingrese una tarea">
+            <button id="agregarTareaBtn" type="submit">Agregar Tarea</button>
+        </form>
         </center>
         <ul id="listaTareas"></ul>
         
@@ -18,41 +20,75 @@
     
     <script>
         const tareaInput = document.getElementById('tareaInput');
-        const agregarTareaBtn = document.getElementById('agregarTareaBtn');
+        const formularioTarea = document.getElementById('formularioTarea');
         const listaTareas = document.getElementById('listaTareas');
+        const tareasGuardadas = JSON.parse(localStorage.getItem('tareas') || '[]');
+        const tareas = Array.isArray(tareasGuardadas) ? tareasGuardadas : [];
 
-        agregarTareaBtn.addEventListener('click',() => {
+        function guardarTareas() {
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+        }
+
+        function mostrarTareas() {
+            listaTareas.replaceChildren();
+            tareas.forEach((tarea, indice) => {
+                const li = document.createElement('li');
+                const texto = document.createElement('span');
+                const eliminarBtn = document.createElement('button');
+
+                texto.textContent = tarea;
+                eliminarBtn.type = 'button';
+                eliminarBtn.className = 'eliminar-tarea';
+                eliminarBtn.textContent = '\u00d7';
+                eliminarBtn.setAttribute('aria-label', `Eliminar ${tarea}`);
+                eliminarBtn.addEventListener('click', () => {
+                    tareas.splice(indice, 1);
+                    guardarTareas();
+                    mostrarTareas();
+                });
+
+                li.append(texto, eliminarBtn);
+                listaTareas.appendChild(li);
+            });
+        }
+
+        formularioTarea.addEventListener('submit', (evento) => {
+            evento.preventDefault();
             const tarea = tareaInput.value.trim();
             if (tarea) {
-                const li = document.createElement('li');
-                li.textContent = tarea;
-                listaTareas.appendChild(li);
+                tareas.push(tarea);
+                guardarTareas();
+                mostrarTareas();
                 tareaInput.value = '';
             }
         });
+
+        mostrarTareas();
     </script>
     <style>
         body {
             background-color: #fcfafa;
         }
         .titulo {
+            max-width: 200px;
             font-family: 'Times New Roman', Times, serif;
-            color: #ffdd00;
+            color: #060606;
             border-radius: 10px;
+            background-color: #ffdd00;
         }
         .tareas {
             font-family: 'Times New Roman', Times, serif;
-            max-width: 400px;
+            max-width: 900px ;
             margin: 50px auto;
             min-height: 300px auto;
-            padding: 20px auto; 
+            padding: 20px;
             background-color: #0000ff77;
             border: 2px solid #ffdd00;
             border-radius: 10px;
         }
         input {
             padding: 10px;
-            margin-right: 10px;
+            margin-right: 10px auto;
             border: 2px solid #ffdd00;
             border-radius: 10px;
         }
@@ -66,15 +102,35 @@
         }
         ul {
             margin: 20px;
-            background-color: #fbfbfc77;
             list-style-type: none;
-            padding-left: 0;
+            padding-left: 10px;
+            margin-bottom: 10px;
             border-radius: 10px;
         }
         li {
-            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+            background-color: #fefefd;
+            padding: 10px;
             color: #000000;
             border-radius: 10px;
+        }
+        .eliminar-tarea {
+            flex: 0 0 24px;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #555;
+            font-size: 20px;
+            line-height: 1;
+        }
+        .eliminar-tarea:hover {
+            color: #c62828;
         }
     </style>
 </body>
