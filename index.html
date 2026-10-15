@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tareas</title>
 </head>
 <body>
     <div class="tareas">
-        <center><h1>Tareas</h1>
+        <center><h2 class="titulo">Tareas</h2>
     
         <input type="text" id="tareaInput" placeholder="Ingrese una tarea">
         <button id="agregarTareaBtn">Agregar Tarea</button>
-        <ul id="listaTareas"></ul>
         </center>
+        <ul id="listaTareas"></ul>
+        
     </div>
     
     <script>
@@ -20,7 +21,7 @@
         const agregarTareaBtn = document.getElementById('agregarTareaBtn');
         const listaTareas = document.getElementById('listaTareas');
 
-        agregarTareaBtn.addEventListener('click', () => {
+        agregarTareaBtn.addEventListener('click',() => {
             const tarea = tareaInput.value.trim();
             if (tarea) {
                 const li = document.createElement('li');
@@ -31,30 +32,49 @@
         });
     </script>
     <style>
+        body {
+            background-color: #fcfafa;
+        }
+        .titulo {
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffdd00;
+            border-radius: 10px;
+        }
         .tareas {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             max-width: 400px;
             margin: 50px auto;
-            background-color: #f3f1e4;
+            min-height: 300px auto;
+            padding: 20px auto; 
+            background-color: #0000ff77;
+            border: 2px solid #ffdd00;
+            border-radius: 10px;
         }
         input {
-            padding: 5px;
+            padding: 10px;
             margin-right: 10px;
+            border: 2px solid #ffdd00;
+            border-radius: 10px;
         }
         button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
+            padding: 10px 15px;
+            background-color: #ffdd00;
+            color: #000000;
+            border: 2px solid #ffdd00;
+            border-radius: 10px;
             cursor: pointer;
         }
         ul {
+            margin: 20px;
+            background-color: #fbfbfc77;
             list-style-type: none;
             padding-left: 0;
+            border-radius: 10px;
         }
         li {
-
-            padding: 5px 0;
+            padding: 10px 0;
+            color: #000000;
+            border-radius: 10px;
         }
     </style>
 </body>
